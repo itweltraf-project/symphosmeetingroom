@@ -75,9 +75,31 @@ export default function HomePage() {
 
   // Handlers
   const handleOpenBooking = (roomId?: string, start?: string, end?: string) => {
-    setModalRoomId(roomId);
-    setModalStartTime(start || '09:00');
-    setModalEndTime(end || '10:00');
+    let targetRoomId = roomId;
+    if (!targetRoomId && rooms.length > 0) {
+      // Find the first available room today
+      const available = rooms.find(r => r.currentStatus === 'available');
+      targetRoomId = available ? available.id : rooms[0].id;
+    }
+
+    let defaultStart = start;
+    let defaultEnd = end;
+    if (!defaultStart || !defaultEnd) {
+      const now = new Date();
+      const curHour = now.getHours();
+      if (curHour >= 7 && curHour < 20) {
+        const nextH = curHour + 1;
+        defaultStart = `${String(nextH).padStart(2, '0')}:00`;
+        defaultEnd = `${String(Math.min(nextH + 1, 21)).padStart(2, '0')}:00`;
+      } else {
+        defaultStart = '08:00';
+        defaultEnd = '09:00';
+      }
+    }
+
+    setModalRoomId(targetRoomId);
+    setModalStartTime(defaultStart);
+    setModalEndTime(defaultEnd);
     setIsBookingModalOpen(true);
   };
 

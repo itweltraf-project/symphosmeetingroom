@@ -122,7 +122,7 @@ export function CancellationModal({
               placeholder="Contoh: MRB-20261013-ABCD"
               value={bookingRef}
               onChange={(e) => setBookingRef(e.target.value.toUpperCase())}
-              className="w-full px-3.5 py-2 text-xs font-mono font-bold tracking-wider rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-red-500 bg-white"
+              className="w-full px-3.5 py-2.5 text-sm sm:text-xs font-mono font-bold tracking-wider rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-red-500 bg-white"
               required
             />
           </div>
@@ -136,7 +136,7 @@ export function CancellationModal({
               placeholder="Masukkan token keamanan..."
               value={cancellationToken}
               onChange={(e) => setCancellationToken(e.target.value)}
-              className="w-full px-3.5 py-2 text-xs font-mono rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-red-500 bg-white"
+              className="w-full px-3.5 py-2.5 text-sm sm:text-xs font-mono rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-red-500 bg-white"
               required
             />
           </div>
@@ -145,14 +145,14 @@ export function CancellationModal({
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2 text-xs font-semibold text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 rounded-xl transition"
+              className="px-4 py-2.5 text-xs font-bold text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 rounded-xl transition cursor-pointer min-h-[42px]"
             >
               Kembali
             </button>
             <button
               type="submit"
               disabled={loading}
-              className="px-5 py-2 text-xs font-bold text-white bg-red-600 hover:bg-red-700 active:bg-red-800 disabled:opacity-50 rounded-xl transition cursor-pointer"
+              className="px-5 py-2.5 text-xs font-extrabold text-white bg-red-600 hover:bg-red-700 active:bg-red-800 disabled:opacity-50 rounded-xl transition cursor-pointer min-h-[42px]"
             >
               {loading ? 'Memproses...' : 'Konfirmasi Batal'}
             </button>

@@ -174,18 +174,18 @@ export function BookingConfirmationModal({ booking, onClose }: BookingConfirmati
           </div>
 
           {/* Actions */}
-          <div className="flex items-center justify-between pt-2">
+          <div className="flex flex-col-reverse sm:flex-row items-stretch sm:items-center justify-between gap-2.5 pt-2">
             <button
               onClick={handlePrint}
-              className="inline-flex items-center gap-1.5 px-4 py-2.5 text-xs font-semibold text-slate-700 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 rounded-xl transition cursor-pointer"
+              className="inline-flex items-center justify-center gap-1.5 px-4 py-2.5 text-xs font-bold text-slate-700 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 rounded-xl transition cursor-pointer min-h-[42px]"
             >
               <Printer className="w-4 h-4" />
-              <span>Cetak Tiket / Pass</span>
+              <span>Cetak / Simpan Pass</span>
             </button>
 
             <button
               onClick={onClose}
-              className="px-6 py-2.5 text-xs font-bold text-white bg-slate-900 hover:bg-black rounded-xl transition shadow-xs cursor-pointer"
+              className="inline-flex items-center justify-center px-6 py-2.5 text-xs font-extrabold text-white bg-emerald-600 hover:bg-emerald-700 rounded-xl transition shadow-sm cursor-pointer min-h-[42px]"
             >
               Selesai & Tutup
             </button>

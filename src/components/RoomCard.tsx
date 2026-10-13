@@ -52,17 +52,17 @@ export function RoomCard({ room, onBookRoom, selectedDate }: RoomCardProps) {
       {/* Top Banner & Room Code */}
       <div>
         <div className="p-5 pb-3">
-          <div className="flex items-center justify-between mb-3">
-            <div className="flex items-center gap-2.5">
-              <span className="w-10 h-10 rounded-xl bg-slate-900 text-white font-black text-lg flex items-center justify-center shadow-xs">
+          <div className="flex flex-wrap items-center justify-between gap-2 mb-2.5">
+            <div className="flex items-center gap-2 sm:gap-2.5">
+              <span className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-900 text-white font-black text-base sm:text-lg flex items-center justify-center shadow-xs shrink-0">
                 {room.room_code}
               </span>
               <div>
-                <h3 className="font-bold text-slate-900 text-base leading-tight">
+                <h3 className="font-extrabold text-slate-900 text-sm sm:text-base leading-tight">
                   {room.room_name}
                 </h3>
-                <div className="flex items-center gap-1.5 text-xs text-slate-500 mt-0.5">
-                  <Users className="w-3.5 h-3.5 text-slate-400" />
+                <div className="flex items-center gap-1.5 text-[11px] sm:text-xs text-slate-500 mt-0.5">
+                  <Users className="w-3.5 h-3.5 text-slate-400 shrink-0" />
                   <span>Kapasitas {room.capacity} Orang</span>
                 </div>
               </div>
@@ -70,9 +70,9 @@ export function RoomCard({ room, onBookRoom, selectedDate }: RoomCardProps) {
 
             {/* Status Badge */}
             <div
-              className={`inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border ${statusConfig.badgeBg}`}
+              className={`inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-bold border ${statusConfig.badgeBg}`}
             >
-              <span className={`w-2 h-2 rounded-full ${statusConfig.dotColor} ${statusConfig.pulseClass}`} />
+              <span className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full ${statusConfig.dotColor} ${statusConfig.pulseClass}`} />
               <span>{statusConfig.label}</span>
             </div>
           </div>
