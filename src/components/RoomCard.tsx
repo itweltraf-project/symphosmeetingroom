@@ -165,9 +165,9 @@ export function RoomCard({ room, onBookRoom, selectedDate }: RoomCardProps) {
 
         <button
           onClick={() => onBookRoom(room)}
-          className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold text-white bg-red-600 hover:bg-red-700 active:bg-red-800 rounded-xl transition shadow-xs hover:shadow cursor-pointer"
+          className="inline-flex items-center gap-1.5 px-3.5 py-2 text-xs font-bold text-white bg-red-600 hover:bg-red-700 active:bg-red-800 rounded-xl transition shadow-xs hover:shadow cursor-pointer min-h-[38px]"
         >
-          <span>Pesan {room.room_code}</span>
+          <span>Booking {room.room_code}</span>
         </button>
       </div>
     </div>

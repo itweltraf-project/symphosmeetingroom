@@ -77,7 +77,7 @@ export function CancellationModal({
             </div>
             <div>
               <h2 className="text-base font-extrabold text-white">
-                Batalkan Pemesanan
+                Batalkan Booking
               </h2>
               <p className="text-xs text-slate-400">
                 Mekanisme Pembatalan Aman

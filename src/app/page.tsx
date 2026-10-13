@@ -128,6 +128,12 @@ export default function HomePage() {
     created_at: r.created_at,
   }));
 
+  // Count occupied vs available rooms
+  const occupiedCount = rooms.filter(
+    r => r.currentStatus === 'occupied' || r.currentStatus === 'upcoming' || (r.bookingsToday && r.bookingsToday.length > 0)
+  ).length;
+  const availableCount = Math.max(0, rooms.length - occupiedCount);
+
   return (
     <div className="min-h-screen bg-slate-50 flex flex-col font-sans">
       
@@ -158,7 +164,7 @@ export default function HomePage() {
                   className="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-5 py-3 text-xs sm:text-sm font-extrabold text-white bg-red-600 hover:bg-red-700 active:bg-red-800 rounded-xl shadow-md transition cursor-pointer"
                 >
                   <PlusCircle className="w-4 h-4" />
-                  <span>Pesan Ruangan Sekarang</span>
+                  <span>Booking Ruang Sekarang</span>
                 </button>
 
                 <button
@@ -185,13 +191,13 @@ export default function HomePage() {
                 <div className="bg-black/25 p-2.5 rounded-xl text-center sm:text-left">
                   <span className="text-[10px] sm:text-[11px] text-slate-400 block">Tersedia</span>
                   <span className="text-lg sm:text-xl font-black text-emerald-400">
-                    {rooms.filter(r => r.currentStatus === 'available').length} Ruang
+                    {availableCount} Ruang
                   </span>
                 </div>
                 <div className="bg-black/25 p-2.5 rounded-xl text-center sm:text-left">
                   <span className="text-[10px] sm:text-[11px] text-slate-400 block">Terpakai</span>
                   <span className="text-lg sm:text-xl font-black text-rose-400">
-                    {rooms.filter(r => r.currentStatus === 'occupied').length} Ruang
+                    {occupiedCount} Ruang
                   </span>
                 </div>
               </div>

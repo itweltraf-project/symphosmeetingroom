@@ -37,7 +37,7 @@ export function AvailabilityTimeline({
             Matriks Ketersediaan Ruangan Harian
           </h3>
           <p className="text-[11px] sm:text-xs text-slate-500 mt-0.5">
-            Jadwal operasional 07:00 - 21:00 WIB. Klik area kosong untuk memesan langsung.
+            Jadwal operasional 07:00 - 21:00 WIB. Klik area kosong untuk booking langsung.
           </p>
         </div>
 

@@ -70,7 +70,7 @@ export function BookingConfirmationModal({ booking, onClose }: BookingConfirmati
             Reservasi Terkonfirmasi!
           </h2>
           <p className="text-xs text-emerald-100 mt-1 max-w-sm mx-auto">
-            Ruangan telah berhasil dipesan dan slot waktu telah dikunci dalam sistem.
+            Ruangan telah berhasil di-booking dan slot waktu telah dikunci dalam sistem.
           </p>
         </div>
 

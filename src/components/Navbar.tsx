@@ -91,7 +91,7 @@ export function Navbar({ onOpenBooking, onOpenCancel, onScrollToSchedule }: Navb
               className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-bold text-white bg-red-600 hover:bg-red-700 active:bg-red-800 rounded-xl shadow-xs transition cursor-pointer"
             >
               <PlusCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
-              <span>Pesan</span>
+              <span>Booking</span>
             </button>
 
             <Link

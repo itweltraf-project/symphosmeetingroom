@@ -867,8 +867,20 @@ export async function getRoomsWithOperationalStatus(
   const rooms = await getMeetingRooms(false);
   const now = new Date();
   
-  // Format current time HH:mm
-  const timeNow = currentTimeStr || `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+  // Format current time HH:mm in WIB (Asia/Jakarta, UTC+7)
+  let timeNow = currentTimeStr;
+  if (!timeNow) {
+    try {
+      timeNow = new Intl.DateTimeFormat('en-GB', {
+        timeZone: 'Asia/Jakarta',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: false,
+      }).format(now);
+    } catch {
+      timeNow = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+    }
+  }
   
   const bookingsForDate = await getBookings({
     date: targetDate,
