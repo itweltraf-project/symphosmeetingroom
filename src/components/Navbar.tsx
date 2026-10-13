@@ -19,14 +19,14 @@ export function Navbar({ onOpenBooking, onOpenCancel, onScrollToSchedule }: Navb
       const now = new Date();
       // Indonesian Date format: Selasa, 13 Oktober 2026
       const dateFormatted = new Intl.DateTimeFormat('id-ID', {
-        weekday: 'long',
+        weekday: 'short',
         day: 'numeric',
-        month: 'long',
+        month: 'short',
         year: 'numeric',
       }).format(now);
 
-      // Time format: 14:35:10 WIB
-      const timeFormatted = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}:${String(now.getSeconds()).padStart(2, '0')} WIB`;
+      // Time format: 14:35 WIB
+      const timeFormatted = `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')} WIB`;
 
       setCurrentDate(dateFormatted);
       setCurrentTime(timeFormatted);
@@ -39,79 +39,83 @@ export function Navbar({ onOpenBooking, onOpenCancel, onScrollToSchedule }: Navb
 
   return (
     <header className="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-200 shadow-xs">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex items-center justify-between h-20">
+      <div className="max-w-7xl mx-auto px-3.5 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between h-16 sm:h-20">
           
           {/* Logo & System Title */}
-          <div className="flex items-center space-x-3">
-            <div className="h-12 w-12 rounded-xl bg-red-600 flex items-center justify-center text-white shadow-md shadow-red-500/20">
-              <Building2 className="w-7 h-7" />
+          <div className="flex items-center space-x-2.5 sm:space-x-3">
+            <div className="h-9 w-9 sm:h-12 sm:w-12 rounded-xl bg-red-600 flex items-center justify-center text-white shadow-md shadow-red-500/20 shrink-0">
+              <Building2 className="w-5 h-5 sm:w-7 sm:h-7" />
             </div>
             <div>
-              <div className="flex items-center gap-2">
-                <span className="font-extrabold text-xl tracking-tight text-slate-900">
+              <div className="flex items-center gap-1.5 sm:gap-2">
+                <span className="font-extrabold text-sm sm:text-xl tracking-tight text-slate-900 leading-none">
                   MEETING ROOM
                 </span>
-                <span className="text-xs font-bold uppercase tracking-wider bg-red-100 text-red-700 px-2 py-0.5 rounded-full">
+                <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider bg-red-100 text-red-700 px-1.5 sm:px-2 py-0.5 rounded-full leading-none">
                   BOOKING
                 </span>
               </div>
-              <p className="text-xs text-slate-500 font-medium">
-                Sistem Reservasi Ruang Rapat Terpusat
+              <p className="text-[10px] sm:text-xs text-slate-500 font-medium hidden xs:block mt-0.5">
+                Sistem Reservasi Terpusat
               </p>
             </div>
           </div>
 
-          {/* Live Date & Time Display */}
-          <div className="hidden lg:flex items-center space-x-6 px-4 py-2 bg-slate-50 rounded-xl border border-slate-200/80">
+          {/* Live Date & Time Display (Desktop) */}
+          <div className="hidden lg:flex items-center space-x-5 px-4 py-2 bg-slate-50 rounded-xl border border-slate-200/80">
             <div className="flex items-center text-sm font-semibold text-slate-700 space-x-2">
               <Calendar className="w-4 h-4 text-slate-500" />
-              <span>{currentDate || 'Memuat tanggal...'}</span>
+              <span>{currentDate || 'Memuat...'}</span>
             </div>
             <div className="h-4 w-px bg-slate-300" />
             <div className="flex items-center text-sm font-bold text-red-600 space-x-2 font-mono">
               <Clock className="w-4 h-4 text-red-500" />
-              <span>{currentTime || '--:--:-- WIB'}</span>
+              <span>{currentTime || '--:-- WIB'}</span>
             </div>
           </div>
 
           {/* Action Buttons */}
-          <div className="flex items-center space-x-2 sm:space-x-3">
-            <button
-              onClick={onScrollToSchedule}
-              className="hidden md:inline-flex items-center gap-1.5 px-3.5 py-2 text-sm font-medium text-slate-700 hover:text-slate-900 hover:bg-slate-100 rounded-lg transition"
-            >
-              <Calendar className="w-4 h-4 text-slate-500" />
-              Jadwal Meeting
-            </button>
-
+          <div className="flex items-center space-x-1.5 sm:space-x-2.5">
             <button
               onClick={onOpenCancel}
-              className="inline-flex items-center gap-1.5 px-3.5 py-2 text-sm font-medium text-slate-600 hover:text-red-700 hover:bg-red-50 rounded-lg transition border border-slate-200"
-              title="Batalkan Booking dengan Kode Referensi"
+              className="inline-flex items-center gap-1 px-2.5 sm:px-3 py-1.5 sm:py-2 text-xs font-medium text-slate-600 hover:text-red-700 hover:bg-red-50 rounded-xl transition border border-slate-200"
+              title="Batalkan Booking"
             >
-              <XCircle className="w-4 h-4 text-slate-400 group-hover:text-red-600" />
-              <span className="hidden sm:inline">Batal Booking</span>
+              <XCircle className="w-3.5 h-3.5 text-slate-400 group-hover:text-red-600" />
+              <span className="hidden sm:inline">Batal</span>
             </button>
 
             <button
               onClick={onOpenBooking}
-              className="inline-flex items-center gap-2 px-4 py-2.5 text-sm font-semibold text-white bg-red-600 hover:bg-red-700 active:bg-red-800 rounded-xl shadow-sm hover:shadow transition cursor-pointer"
+              className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-bold text-white bg-red-600 hover:bg-red-700 active:bg-red-800 rounded-xl shadow-xs transition cursor-pointer"
             >
-              <PlusCircle className="w-4 h-4" />
-              <span>Pesan Ruangan</span>
+              <PlusCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              <span>Pesan</span>
             </button>
 
             <Link
               href="/admin"
-              className="inline-flex items-center gap-1.5 px-3 py-2 text-xs font-semibold text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 rounded-lg transition border border-slate-200"
+              className="inline-flex items-center gap-1 px-2.5 sm:px-3 py-1.5 sm:py-2 text-xs font-semibold text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 rounded-xl transition border border-slate-200"
               title="Masuk ke Dashboard Administrator"
             >
               <Shield className="w-3.5 h-3.5 text-slate-500" />
-              <span className="hidden md:inline">Admin</span>
+              <span className="hidden sm:inline">Admin</span>
             </Link>
           </div>
 
+        </div>
+
+        {/* Mobile Clock Sub-bar */}
+        <div className="lg:hidden flex items-center justify-between py-1.5 px-1 border-t border-slate-100 text-[11px] text-slate-500">
+          <div className="flex items-center gap-1 font-medium">
+            <Calendar className="w-3 h-3 text-slate-400" />
+            <span>{currentDate}</span>
+          </div>
+          <div className="flex items-center gap-1 font-mono font-bold text-red-600">
+            <Clock className="w-3 h-3 text-red-500" />
+            <span>{currentTime}</span>
+          </div>
         </div>
       </div>
     </header>

@@ -37,7 +37,9 @@ import {
   Building2, 
   RefreshCw,
   ShieldAlert,
-  ArrowUpRight
+  ArrowUpRight,
+  Menu,
+  X
 } from 'lucide-react';
 import { format } from 'date-fns';
 import { id as localeId } from 'date-fns/locale';
@@ -56,6 +58,7 @@ export default function AdminDashboardPage() {
   const [activeTab, setActiveTab] = useState<AdminTab>('dashboard');
   const [adminUser, setAdminUser] = useState<{ email: string; role: string } | null>(null);
   const [authChecked, setAuthChecked] = useState(false);
+  const [mobileNavOpen, setMobileNavOpen] = useState(false);
 
   // Data states
   const [stats, setStats] = useState<DashboardStats | null>(null);
@@ -235,32 +238,75 @@ export default function AdminDashboardPage() {
       <aside className="w-full md:w-64 bg-slate-900 text-slate-300 flex flex-col justify-between shrink-0 border-r border-slate-800">
         <div>
           {/* Brand Header */}
-          <div className="p-6 border-b border-slate-800">
+          <div className="p-4 sm:p-6 border-b border-slate-800 flex items-center justify-between md:block">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-red-600 flex items-center justify-center text-white font-black shadow-md">
-                <Building2 className="w-6 h-6" />
+              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-red-600 flex items-center justify-center text-white font-black shadow-md shrink-0">
+                <Building2 className="w-5 h-5 sm:w-6 sm:h-6" />
               </div>
               <div>
-                <h2 className="font-extrabold text-white text-sm tracking-tight">
+                <h2 className="font-extrabold text-white text-sm tracking-tight leading-none">
                   ADMIN PORTAL
                 </h2>
-                <span className="text-[10px] text-slate-400 font-mono">
+                <span className="text-[10px] text-slate-400 font-mono mt-1 block">
                   Meeting Room System
                 </span>
               </div>
             </div>
 
-            <div className="mt-4 p-2.5 rounded-xl bg-slate-800/80 border border-slate-700/80 text-[11px]">
+            {/* Mobile Hamburger Toggle */}
+            <button
+              onClick={() => setMobileNavOpen(!mobileNavOpen)}
+              className="md:hidden p-2 text-slate-400 hover:text-white rounded-xl bg-slate-800 border border-slate-700 cursor-pointer"
+              title="Menu Navigasi"
+            >
+              {mobileNavOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </button>
+
+            <div className="hidden md:block mt-4 p-2.5 rounded-xl bg-slate-800/80 border border-slate-700/80 text-[11px]">
               <span className="text-slate-400 block text-[10px] uppercase font-bold">Logged In As:</span>
               <strong className="text-white truncate block">{adminUser?.email}</strong>
             </div>
           </div>
 
+          {/* Mobile Horizontal Quick Tab Bar (when menu collapsed) */}
+          <div className="md:hidden flex overflow-x-auto p-2 gap-1.5 border-b border-slate-800 bg-slate-950/40">
+            {[
+              { id: 'dashboard', label: 'Dashboard', icon: LayoutDashboard },
+              { id: 'all_bookings', label: 'Bookings', icon: FileSpreadsheet },
+              { id: 'room_schedule', label: 'Jadwal', icon: CalendarRange },
+              { id: 'meeting_rooms', label: 'Ruangan', icon: DoorClosed },
+              { id: 'reports', label: 'Laporan', icon: BarChart3 },
+              { id: 'booking_history', label: 'Audit', icon: History },
+            ].map((tab) => {
+              const Icon = tab.icon;
+              return (
+                <button
+                  key={tab.id}
+                  onClick={() => {
+                    setActiveTab(tab.id as AdminTab);
+                    setMobileNavOpen(false);
+                  }}
+                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-bold whitespace-nowrap transition shrink-0 ${
+                    activeTab === tab.id
+                      ? 'bg-red-600 text-white shadow-xs'
+                      : 'text-slate-400 hover:text-white bg-slate-800/60'
+                  }`}
+                >
+                  <Icon className="w-3.5 h-3.5" />
+                  <span>{tab.label}</span>
+                </button>
+              );
+            })}
+          </div>
+
           {/* Navigation Links */}
-          <nav className="p-4 space-y-1 text-xs font-semibold">
+          <nav className={`${mobileNavOpen ? 'block' : 'hidden md:block'} p-3 sm:p-4 space-y-1 text-xs font-semibold`}>
             <button
-              onClick={() => setActiveTab('dashboard')}
-              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition text-left ${
+              onClick={() => {
+                setActiveTab('dashboard');
+                setMobileNavOpen(false);
+              }}
+              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition text-left cursor-pointer ${
                 activeTab === 'dashboard'
                   ? 'bg-red-600 text-white font-bold shadow-xs'
                   : 'hover:bg-slate-800 hover:text-white text-slate-300'
@@ -271,8 +317,11 @@ export default function AdminDashboardPage() {
             </button>
 
             <button
-              onClick={() => setActiveTab('all_bookings')}
-              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition text-left ${
+              onClick={() => {
+                setActiveTab('all_bookings');
+                setMobileNavOpen(false);
+              }}
+              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition text-left cursor-pointer ${
                 activeTab === 'all_bookings'
                   ? 'bg-red-600 text-white font-bold shadow-xs'
                   : 'hover:bg-slate-800 hover:text-white text-slate-300'
@@ -283,8 +332,11 @@ export default function AdminDashboardPage() {
             </button>
 
             <button
-              onClick={() => setActiveTab('room_schedule')}
-              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition text-left ${
+              onClick={() => {
+                setActiveTab('room_schedule');
+                setMobileNavOpen(false);
+              }}
+              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition text-left cursor-pointer ${
                 activeTab === 'room_schedule'
                   ? 'bg-red-600 text-white font-bold shadow-xs'
                   : 'hover:bg-slate-800 hover:text-white text-slate-300'
@@ -295,8 +347,11 @@ export default function AdminDashboardPage() {
             </button>
 
             <button
-              onClick={() => setActiveTab('meeting_rooms')}
-              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition text-left ${
+              onClick={() => {
+                setActiveTab('meeting_rooms');
+                setMobileNavOpen(false);
+              }}
+              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition text-left cursor-pointer ${
                 activeTab === 'meeting_rooms'
                   ? 'bg-red-600 text-white font-bold shadow-xs'
                   : 'hover:bg-slate-800 hover:text-white text-slate-300'
@@ -307,8 +362,11 @@ export default function AdminDashboardPage() {
             </button>
 
             <button
-              onClick={() => setActiveTab('reports')}
-              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition text-left ${
+              onClick={() => {
+                setActiveTab('reports');
+                setMobileNavOpen(false);
+              }}
+              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition text-left cursor-pointer ${
                 activeTab === 'reports'
                   ? 'bg-red-600 text-white font-bold shadow-xs'
                   : 'hover:bg-slate-800 hover:text-white text-slate-300'
@@ -319,8 +377,11 @@ export default function AdminDashboardPage() {
             </button>
 
             <button
-              onClick={() => setActiveTab('booking_history')}
-              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition text-left ${
+              onClick={() => {
+                setActiveTab('booking_history');
+                setMobileNavOpen(false);
+              }}
+              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition text-left cursor-pointer ${
                 activeTab === 'booking_history'
                   ? 'bg-red-600 text-white font-bold shadow-xs'
                   : 'hover:bg-slate-800 hover:text-white text-slate-300'
@@ -331,8 +392,11 @@ export default function AdminDashboardPage() {
             </button>
 
             <button
-              onClick={() => setActiveTab('settings')}
-              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition text-left ${
+              onClick={() => {
+                setActiveTab('settings');
+                setMobileNavOpen(false);
+              }}
+              className={`w-full flex items-center gap-3 px-3.5 py-2.5 rounded-xl transition text-left cursor-pointer ${
                 activeTab === 'settings'
                   ? 'bg-red-600 text-white font-bold shadow-xs'
                   : 'hover:bg-slate-800 hover:text-white text-slate-300'
@@ -345,7 +409,12 @@ export default function AdminDashboardPage() {
         </div>
 
         {/* Bottom Actions */}
-        <div className="p-4 border-t border-slate-800 space-y-2">
+        <div className={`${mobileNavOpen ? 'block' : 'hidden md:block'} p-3 sm:p-4 border-t border-slate-800 space-y-2`}>
+          <div className="md:hidden p-2.5 rounded-xl bg-slate-800/80 border border-slate-700/80 text-[11px] mb-2">
+            <span className="text-slate-400 block text-[10px] uppercase font-bold">Logged In As:</span>
+            <strong className="text-white truncate block">{adminUser?.email}</strong>
+          </div>
+
           <Link
             href="/"
             className="w-full flex items-center justify-between px-3.5 py-2 text-xs font-semibold text-slate-400 hover:text-white hover:bg-slate-800 rounded-xl transition"

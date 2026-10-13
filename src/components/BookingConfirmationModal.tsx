@@ -48,14 +48,14 @@ export function BookingConfirmationModal({ booking, onClose }: BookingConfirmati
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-900/60 backdrop-blur-xs overflow-y-auto">
-      <div className="bg-white rounded-3xl max-w-lg w-full shadow-2xl border border-slate-200 overflow-hidden my-8 animate-in fade-in zoom-in-95 duration-200">
+    <div className="fixed inset-0 z-50 flex items-center justify-center p-2.5 sm:p-4 bg-slate-900/60 backdrop-blur-xs overflow-y-auto">
+      <div className="bg-white rounded-2xl sm:rounded-3xl max-w-lg w-full shadow-2xl border border-slate-200 overflow-hidden my-auto max-h-[94vh] flex flex-col animate-in fade-in zoom-in-95 duration-200">
         
         {/* Success Banner */}
-        <div className="bg-gradient-to-r from-emerald-600 to-emerald-700 p-6 text-white text-center relative">
+        <div className="bg-gradient-to-r from-emerald-600 to-emerald-700 p-4 sm:p-6 text-white text-center relative shrink-0">
           <button
             onClick={onClose}
-            className="absolute top-4 right-4 p-1.5 text-emerald-200 hover:text-white rounded-xl hover:bg-emerald-800/50 transition"
+            className="absolute top-3 right-3 sm:top-4 sm:right-4 p-1.5 text-emerald-200 hover:text-white rounded-xl hover:bg-emerald-800/50 transition"
           >
             <X className="w-5 h-5" />
           </button>
