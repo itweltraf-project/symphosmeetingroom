@@ -31,7 +31,10 @@ let sqliteInstance: DatabaseSync | null = null;
 
 function getSqliteDb(): DatabaseSync {
   if (!sqliteInstance) {
-    const dbPath = path.resolve(process.cwd(), 'meeting_rooms.db');
+    const isServerless = Boolean(process.env.VERCEL || process.env.AWS_LAMBDA_FUNCTION_NAME);
+    const dbPath = isServerless
+      ? path.join('/tmp', 'meeting_rooms.db')
+      : path.resolve(process.cwd(), 'meeting_rooms.db');
     sqliteInstance = new DatabaseSync(dbPath);
     sqliteInstance.exec('PRAGMA journal_mode = WAL;');
     initSqliteSchema(sqliteInstance);
