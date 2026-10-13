@@ -147,7 +147,6 @@ export function BookingModal({
               <span className="text-xs font-bold uppercase tracking-wider bg-red-600 text-white px-2.5 py-0.5 rounded-full">
                 FORMULIR PEMESANAN
               </span>
-              <span className="text-xs text-slate-400">Tanpa Login</span>
             </div>
             <h2 className="text-xl font-extrabold text-white mt-1">
               Booking Ruang Meeting
@@ -234,7 +233,7 @@ export function BookingModal({
                     </span>
                   </div>
                   <span className="font-bold text-xs text-slate-800 mt-2 truncate">
-                    {r.room_name.split('(')[1]?.replace(')', '') || r.room_name}
+                    Ruang {r.room_code}
                   </span>
                 </button>
               ))}

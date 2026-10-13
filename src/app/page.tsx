@@ -133,18 +133,9 @@ export default function HomePage() {
 
           <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-6">
             <div className="max-w-2xl">
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-600/30 border border-red-500/40 text-red-300 text-xs font-bold mb-3">
-                <ShieldCheck className="w-3.5 h-3.5" />
-                <span>Persetujuan Instan & Proteksi Bentrok Otomatis</span>
-              </div>
-              
               <h1 className="text-3xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight text-white">
-                Booking Ruang Meeting <span className="text-red-500">Tanpa Login</span>
+                Booking Ruang Meeting
               </h1>
-              
-              <p className="mt-3 text-sm sm:text-base text-slate-300 leading-relaxed">
-                Reservasi cepat untuk 4 ruang meeting perusahaan (R1, R2, R3, R4). Pilih waktu fleksibel dan dapatkan konfirmasi jadwal seketika tanpa perlu mendaftar akun.
-              </p>
 
               {/* Quick Actions */}
               <div className="mt-6 flex flex-wrap items-center gap-3">

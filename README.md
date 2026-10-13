@@ -6,10 +6,10 @@ Sistem reservasi ruang rapat modern, responsif, dan terpusat untuk lingkungan pe
 
 ## 🏢 Daftar Ruang Rapat Pre-Configured
 
-1. **Ruang R1 (Executive)**: Kapasitas 16 orang (Proyektor Laser 4K, Polycom Video Conference, Sound System, Whiteboard Kaca, AC VIP).
-2. **Ruang R2 (Creative & Design)**: Kapasitas 10 orang (Smart TV 75" 4K, Glass Whiteboard, Wireless Presentation, AC).
-3. **Ruang R3 (Operational & Engineering)**: Kapasitas 8 orang (Monitor LED 55", Whiteboard, Conference Mic, AC).
-4. **Ruang R4 (Focus & Interview)**: Kapasitas 6 orang (Monitor LED 50", Panel Kedap Suara, Whiteboard, AC).
+1. **Ruang R1**: Kapasitas 16 orang (Proyektor Laser 4K, Polycom Video Conference, Sound System, Whiteboard Kaca, AC VIP).
+2. **Ruang R2**: Kapasitas 10 orang (Smart TV 75" 4K, Glass Whiteboard, Wireless Presentation, AC).
+3. **Ruang R3**: Kapasitas 8 orang (Monitor LED 55", Whiteboard, Conference Mic, AC).
+4. **Ruang R4**: Kapasitas 6 orang (Monitor LED 50", Panel Kedap Suara, Whiteboard, AC).
 
 ---
 

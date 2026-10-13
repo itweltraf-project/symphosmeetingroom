@@ -23,10 +23,10 @@ CREATE TABLE IF NOT EXISTS meeting_rooms (
 -- Preconfigure the four rooms: R1, R2, R3, R4
 INSERT INTO meeting_rooms (room_code, room_name, capacity, description, facilities, is_active)
 VALUES 
-    ('R1', 'Ruang Meeting R1 (Executive)', 16, 'Ruang rapat eksekutif dilengkapi proyektor laser 4K, video conference Polycom, sound system, dan meja rapat besar.', ARRAY['Proyektor 4K', 'Video Conference', 'Sound System', 'Whiteboard', 'AC VIP'], true),
-    ('R2', 'Ruang Meeting R2 (Creative)', 10, 'Ruang kolaborasi kreatif dengan Smart TV 75 inch interaktif, whiteboard kaca dinding penuh, dan konektivitas nirkabel.', ARRAY['Smart TV 75"', 'Glass Whiteboard', 'Wireless Presentation', 'AC'], true),
-    ('R3', 'Ruang Meeting R3 (Operational)', 8, 'Ruang rapat operasional tim untuk koordinasi harian, briefing shift, dan evaluasi kerja.', ARRAY['Monitor LED 55"', 'Whiteboard', 'Conference Mic', 'AC'], true),
-    ('R4', 'Ruang Meeting R4 (Focus)', 6, 'Ruang diskusi fokus untuk wawancara kerja, rapat internal kecil, dan konsultasi tertutup.', ARRAY['Monitor LED 50"', 'Soundproofing', 'Whiteboard', 'AC'], true)
+    ('R1', 'Ruang R1', 16, 'Ruang rapat dilengkapi proyektor laser 4K, video conference Polycom, sound system, dan meja rapat besar.', ARRAY['Proyektor 4K', 'Video Conference', 'Sound System', 'Whiteboard', 'AC VIP'], true),
+    ('R2', 'Ruang R2', 10, 'Ruang kolaborasi dengan Smart TV 75 inch interaktif, whiteboard kaca dinding penuh, dan konektivitas nirkabel.', ARRAY['Smart TV 75"', 'Glass Whiteboard', 'Wireless Presentation', 'AC'], true),
+    ('R3', 'Ruang R3', 8, 'Ruang rapat tim untuk koordinasi harian, briefing shift, dan evaluasi kerja.', ARRAY['Monitor LED 55"', 'Whiteboard', 'Conference Mic', 'AC'], true),
+    ('R4', 'Ruang R4', 6, 'Ruang diskusi untuk rapat internal kecil dan konsultasi tertutup.', ARRAY['Monitor LED 50"', 'Soundproofing', 'Whiteboard', 'AC'], true)
 ON CONFLICT (room_code) DO UPDATE 
 SET room_name = EXCLUDED.room_name,
     capacity = EXCLUDED.capacity,

@@ -97,6 +97,14 @@ function initSqliteSchema(db: DatabaseSync) {
     CREATE INDEX IF NOT EXISTS idx_bookings_date_room ON bookings(meeting_date, room_id, status);
   `);
 
+  // Ensure room names are simplified to Ruang R1, Ruang R2, Ruang R3, Ruang R4
+  db.exec(`
+    UPDATE meeting_rooms SET room_name = 'Ruang R1' WHERE room_code = 'R1';
+    UPDATE meeting_rooms SET room_name = 'Ruang R2' WHERE room_code = 'R2';
+    UPDATE meeting_rooms SET room_name = 'Ruang R3' WHERE room_code = 'R3';
+    UPDATE meeting_rooms SET room_name = 'Ruang R4' WHERE room_code = 'R4';
+  `);
+
   // Seed default 4 rooms: R1, R2, R3, R4
   const existingRooms = db.prepare('SELECT COUNT(*) as count FROM meeting_rooms').get() as { count: number };
   if (existingRooms.count === 0) {
@@ -109,9 +117,9 @@ function initSqliteSchema(db: DatabaseSync) {
     insertRoom.run(
       'room-r1-uuid-0001',
       'R1',
-      'Ruang Meeting R1 (Executive)',
+      'Ruang R1',
       16,
-      'Ruang rapat eksekutif berstandar internasional dengan proyektor laser 4K, sistem video conference Polycom, sound system terintegrasi, dan meja rapat eksekutif.',
+      'Ruang rapat dengan proyektor laser 4K, sistem video conference Polycom, sound system, whiteboard kaca, dan AC VIP.',
       JSON.stringify(['Proyektor Laser 4K', 'Video Conference Polycom', 'Wireless Mic & Audio', 'Whiteboard Kaca', 'AC VIP']),
       now
     );
@@ -119,9 +127,9 @@ function initSqliteSchema(db: DatabaseSync) {
     insertRoom.run(
       'room-r2-uuid-0002',
       'R2',
-      'Ruang Meeting R2 (Creative & Design)',
+      'Ruang R2',
       10,
-      'Ruang kolaborasi tim kreatif dilengkapi Smart TV 75 inch interaktif, konektivitas wireless screen-cast, dan whiteboard dinding penuh untuk brainstorming.',
+      'Ruang kolaborasi dilengkapi Smart TV 75 inch interaktif, konektivitas wireless screen-cast, dan whiteboard dinding penuh.',
       JSON.stringify(['Smart TV 75" 4K', 'Glass Whiteboard', 'Wireless Presentation', 'Audio Speakerphone', 'AC']),
       now
     );
@@ -129,9 +137,9 @@ function initSqliteSchema(db: DatabaseSync) {
     insertRoom.run(
       'room-r3-uuid-0003',
       'R3',
-      'Ruang Meeting R3 (Operational & Engineering)',
+      'Ruang R3',
       8,
-      'Ruang rapat operasional tim teknik dan manufaktur untuk koordinasi harian, tinjauan shift, dan evaluasi target produksi.',
+      'Ruang rapat tim dilengkapi monitor LED 55 inch, whiteboard, conference mic, dan konektivitas LAN/WiFi.',
       JSON.stringify(['Monitor LED 55"', 'Whiteboard', 'Conference Mic', 'High-Speed LAN/WiFi', 'AC']),
       now
     );
@@ -139,9 +147,9 @@ function initSqliteSchema(db: DatabaseSync) {
     insertRoom.run(
       'room-r4-uuid-0004',
       'R4',
-      'Ruang Meeting R4 (Focus & Interview)',
+      'Ruang R4',
       6,
-      'Ruang diskusi kedap suara untuk sesi wawancara rekrutmen kerja, meeting 1-on-1, dan konsultasi tertutup.',
+      'Ruang diskusi kedap suara untuk sesi rapat internal kecil dan konsultasi tertutup.',
       JSON.stringify(['Monitor LED 50"', 'Soundproofing Panel', 'Whiteboard', 'AC']),
       now
     );

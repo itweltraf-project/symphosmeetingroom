@@ -150,7 +150,7 @@ export function VisualCalendar({
               <option value="all">Semua Ruangan (R1 - R4)</option>
               {rooms.map((r) => (
                 <option key={r.id} value={r.room_code}>
-                  Ruang {r.room_code} - {r.room_name}
+                  Ruang {r.room_code}
                 </option>
               ))}
             </select>

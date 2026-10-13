@@ -163,7 +163,7 @@ export function AdminEditModal({
               >
                 {rooms.map((r) => (
                   <option key={r.id} value={r.id}>
-                    Ruang {r.room_code} - {r.room_name}
+                    Ruang {r.room_code}
                   </option>
                 ))}
               </select>
