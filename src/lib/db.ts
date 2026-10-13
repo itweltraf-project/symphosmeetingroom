@@ -834,6 +834,86 @@ export async function cancelBooking(
   return { success: true };
 }
 
+export async function cancelBookingsByEmployeeName(
+  employeeName: string
+): Promise<{ success: boolean; error?: string; cancelledCount?: number; bookings?: Booking[] }> {
+  const cleanName = employeeName.trim();
+  if (!cleanName) {
+    return { success: false, error: 'Nama lengkap wajib diisi.' };
+  }
+
+  const db = getSqliteDb();
+  
+  // Find confirmed bookings for this employee name
+  let rows = db.prepare(`
+    SELECT b.*, r.room_code, r.room_name
+    FROM bookings b
+    JOIN meeting_rooms r ON b.room_id = r.id
+    WHERE LOWER(TRIM(b.employee_name)) = LOWER(TRIM(?))
+      AND b.status = 'Confirmed'
+    ORDER BY b.meeting_date DESC, b.start_time DESC
+  `).all(cleanName) as any[];
+
+  if (rows.length === 0) {
+    // Try partial/fuzzy match
+    rows = db.prepare(`
+      SELECT b.*, r.room_code, r.room_name
+      FROM bookings b
+      JOIN meeting_rooms r ON b.room_id = r.id
+      WHERE LOWER(b.employee_name) LIKE '%' || LOWER(?) || '%'
+        AND b.status = 'Confirmed'
+      ORDER BY b.meeting_date DESC, b.start_time DESC
+    `).all(cleanName) as any[];
+  }
+
+  if (rows.length === 0) {
+    return {
+      success: false,
+      error: `Tidak ditemukan booking aktif atas nama "${cleanName}". Pastikan nama lengkap sesuai dengan yang dimasukkan saat booking.`,
+    };
+  }
+
+  const nowIso = new Date().toISOString();
+  db.exec('BEGIN IMMEDIATE;');
+  try {
+    const cancelledList: Booking[] = [];
+    for (const b of rows) {
+      db.prepare(`
+        UPDATE bookings 
+        SET status = 'Cancelled', cancelled_at = ?, updated_at = ?
+        WHERE id = ?
+      `).run(nowIso, nowIso, b.id);
+
+      // Audit log
+      const auditId = `audit-${Date.now()}-${Math.random().toString(36).substring(2, 6)}`;
+      db.prepare(`
+        INSERT INTO booking_audit_logs (
+          id, booking_id, action, performed_by, previous_values, new_values, created_at
+        ) VALUES (?, ?, 'CANCELLED', ?, ?, ?, ?)
+      `).run(
+        auditId,
+        b.id,
+        `${b.employee_name} (${b.department})`,
+        JSON.stringify(b),
+        JSON.stringify({ status: 'Cancelled', cancelled_at: nowIso }),
+        nowIso
+      );
+
+      cancelledList.push({ ...b, status: 'Cancelled', cancelled_at: nowIso });
+    }
+    db.exec('COMMIT;');
+
+    return {
+      success: true,
+      cancelledCount: cancelledList.length,
+      bookings: cancelledList,
+    };
+  } catch (err: any) {
+    db.exec('ROLLBACK;');
+    return { success: false, error: `Gagal membatalkan booking: ${err.message}` };
+  }
+}
+
 export async function getAuditLogs(bookingId?: string): Promise<BookingAuditLog[]> {
   const db = getSqliteDb();
   let sql = 'SELECT * FROM booking_audit_logs';

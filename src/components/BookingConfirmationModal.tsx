@@ -152,24 +152,14 @@ export function BookingConfirmationModal({ booking, onClose }: BookingConfirmati
             </div>
           </div>
 
-          {/* Cancellation Info & Token */}
-          <div className="p-3.5 bg-amber-50 rounded-2xl border border-amber-200 text-[11px] text-amber-900 flex items-start gap-2.5">
-            <KeyRound className="w-4 h-4 text-amber-700 shrink-0 mt-0.5" />
+          {/* Cancellation Info */}
+          <div className="p-3.5 bg-slate-50 rounded-2xl border border-slate-200 text-[11px] text-slate-700 flex items-start gap-2.5">
+            <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0 mt-0.5" />
             <div className="flex-1">
-              <span className="font-bold block text-amber-950">Mekanisme Pembatalan Reservasi:</span>
-              <p className="mt-0.5">
-                Jika Anda ingin membatalkan jadwal ini, gunakan menu <strong>Batal Booking</strong> di header dengan memasukkan kode referensi di atas dan token keamanan berikut:
+              <span className="font-bold block text-slate-900">Pembatalan Praktis Tanpa Kode:</span>
+              <p className="mt-0.5 leading-relaxed">
+                Jika berhalangan, cukup buka menu <strong>Batal</strong> di bagian atas, masukkan nama Anda (<strong>{booking.employee_name}</strong>), lalu setujui pembatalan. Ruangan akan langsung dibuka kembali.
               </p>
-              <div className="flex items-center gap-2 mt-1.5 font-mono font-bold text-amber-950 bg-amber-100/80 px-2 py-1 rounded-lg">
-                <span className="truncate">{booking.cancellation_token}</span>
-                <button
-                  onClick={() => copyToClipboard(booking.cancellation_token, 'token')}
-                  className="p-1 hover:bg-amber-200 rounded text-amber-800 transition"
-                  title="Salin Token Pembatalan"
-                >
-                  {copiedToken ? <Check className="w-3.5 h-3.5 text-emerald-700" /> : <Copy className="w-3.5 h-3.5" />}
-                </button>
-              </div>
             </div>
           </div>
 
