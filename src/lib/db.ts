@@ -104,6 +104,7 @@ function initSqliteSchema(db: DatabaseSync) {
     UPDATE meeting_rooms SET room_name = 'Ruang R2', facilities = '${defaultFacilitiesJson}', description = 'Ruang kolaborasi tim berkapasitas 10 orang, dilengkapi TV LG 65 INCH, WIFI, dan JETE VIDEO CONFRENCE.' WHERE room_code = 'R2';
     UPDATE meeting_rooms SET room_name = 'Ruang R3', facilities = '${defaultFacilitiesJson}', description = 'Ruang pertemuan tim berkapasitas 8 orang, dilengkapi TV LG 65 INCH, WIFI, dan JETE VIDEO CONFRENCE.' WHERE room_code = 'R3';
     UPDATE meeting_rooms SET room_name = 'Ruang R4', facilities = '${defaultFacilitiesJson}', description = 'Ruang diskusi fokus berkapasitas 6 orang, dilengkapi TV LG 65 INCH, WIFI, dan JETE VIDEO CONFRENCE.' WHERE room_code = 'R4';
+    UPDATE admin_users SET email = 'HRGA' WHERE id = 'admin-uuid-0001' OR email = 'admin@company.com';
   `);
 
   // Seed default 4 rooms: R1, R2, R3, R4

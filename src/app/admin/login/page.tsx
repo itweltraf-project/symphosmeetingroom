@@ -7,8 +7,8 @@ import { Shield, Lock, Mail, ArrowRight, Building2, AlertCircle, ArrowLeft } fro
 
 export default function AdminLoginPage() {
   const router = useRouter();
-  const [email, setEmail] = useState('admin@company.com');
-  const [password, setPassword] = useState('Admin#2026!');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
@@ -26,7 +26,7 @@ export default function AdminLoginPage() {
 
       const data = await res.json();
       if (!res.ok) {
-        setErrorMessage(data.error || 'Login gagal. Periksa email dan password.');
+        setErrorMessage(data.error || 'Login gagal. Periksa username dan password.');
         return;
       }
 
@@ -82,17 +82,18 @@ export default function AdminLoginPage() {
         <form onSubmit={handleLogin} className="space-y-4">
           <div>
             <label className="block text-xs font-bold text-slate-700 mb-1.5">
-              Email Administrator
+              Username Administrator
             </label>
             <div className="relative">
               <Mail className="w-4 h-4 text-slate-400 absolute left-3.5 top-3" />
               <input
-                type="email"
+                type="text"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
-                placeholder="admin@company.com"
+                placeholder="Masukkan username"
                 className="w-full pl-10 pr-3.5 py-2.5 text-xs rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-red-500"
                 required
+                autoComplete="username"
               />
             </div>
           </div>
@@ -107,19 +108,11 @@ export default function AdminLoginPage() {
                 type="password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
-                placeholder="••••••••"
+                placeholder="Masukkan kata sandi"
                 className="w-full pl-10 pr-3.5 py-2.5 text-xs rounded-xl border border-slate-300 focus:outline-none focus:ring-2 focus:ring-red-500"
                 required
+                autoComplete="current-password"
               />
-            </div>
-          </div>
-
-          {/* Quick Demo Credentials Info */}
-          <div className="p-3 bg-slate-50 rounded-xl border border-slate-200 text-[11px] text-slate-600 space-y-1">
-            <span className="font-bold text-slate-800 block">Kredensial Default Admin:</span>
-            <div className="flex justify-between font-mono">
-              <span>Email: <strong>admin@company.com</strong></span>
-              <span>Pass: <strong>Admin#2026!</strong></span>
             </div>
           </div>
 

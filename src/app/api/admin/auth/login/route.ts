@@ -9,36 +9,35 @@ export async function POST(req: NextRequest) {
 
     if (!email || !password) {
       return NextResponse.json(
-        { success: false, error: 'Email dan password wajib diisi' },
+        { success: false, error: 'Username/email dan password wajib diisi' },
         { status: 400 }
       );
     }
 
-    const cleanEmail = email.trim().toLowerCase();
+    const cleanInput = email.trim();
+    const cleanLower = cleanInput.toLowerCase();
     
-    // Check default pre-configured credentials
-    // admin@company.com / Admin#2026!
-    const isValidAdmin = 
-      (cleanEmail === 'admin@company.com' || cleanEmail === 'admin@office.com') && 
-      password === 'Admin#2026!';
+    // Valid admin credentials: username HRGA
+    const isUserMatch = cleanLower === 'hrga' || cleanLower === 'hrga@company.com';
+    const isPasswordMatch = password === 'Itweltraf1011#';
 
-    if (!isValidAdmin) {
+    if (!isUserMatch || !isPasswordMatch) {
       return NextResponse.json(
-        { success: false, error: 'Email atau password administrator salah' },
+        { success: false, error: 'Username atau kata sandi administrator salah' },
         { status: 401 }
       );
     }
 
     const res = NextResponse.json({
       success: true,
-      message: 'Login berhasil sebagai Administrator',
+      message: 'Login berhasil sebagai Administrator HRGA',
       user: {
-        email: cleanEmail,
+        email: 'HRGA',
         role: 'admin',
       },
     });
 
-    setAdminCookie(res, cleanEmail);
+    setAdminCookie(res, 'HRGA');
     return res;
   } catch (error: any) {
     return NextResponse.json(
