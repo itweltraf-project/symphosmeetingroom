@@ -473,11 +473,11 @@ export function BookingModal({
             </div>
           )}
 
-          <div className="flex items-center justify-end gap-2.5">
+          <div className="flex items-center justify-end gap-2 sm:gap-2.5">
             <button
               type="button"
               onClick={onClose}
-              className="px-4 py-2.5 text-xs font-bold text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 rounded-xl transition cursor-pointer min-h-[42px]"
+              className="px-3.5 sm:px-4 py-2.5 text-xs font-bold text-slate-700 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 rounded-xl transition cursor-pointer min-h-[42px] shrink-0"
             >
               Batal
             </button>
@@ -485,17 +485,18 @@ export function BookingModal({
               type="button"
               onClick={handleSubmit}
               disabled={loading}
-              className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-2 px-6 py-2.5 text-xs sm:text-sm font-extrabold text-white bg-red-600 hover:bg-red-700 active:bg-red-800 disabled:opacity-50 rounded-xl shadow-md transition cursor-pointer min-h-[42px]"
+              className="flex-1 sm:flex-initial inline-flex items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-6 py-2.5 text-xs sm:text-sm font-extrabold text-white bg-red-600 hover:bg-red-700 active:bg-red-800 disabled:opacity-50 rounded-xl shadow-md transition cursor-pointer min-h-[42px] min-w-0"
             >
               {loading ? (
                 <>
-                  <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin" />
-                  <span>Memverifikasi...</span>
+                  <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin shrink-0" />
+                  <span className="truncate">Memverifikasi...</span>
                 </>
               ) : (
                 <>
-                  <CheckCircle className="w-4 h-4" />
-                  <span>Konfirmasi & Simpan Booking</span>
+                  <CheckCircle className="w-4 h-4 shrink-0" />
+                  <span className="truncate sm:hidden">Simpan Booking</span>
+                  <span className="hidden sm:inline">Konfirmasi & Simpan Booking</span>
                 </>
               )}
             </button>

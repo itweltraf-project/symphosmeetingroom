@@ -43,24 +43,24 @@ export function Navbar({ onOpenBooking, onOpenCancel, onScrollToSchedule }: Navb
         <div className="flex items-center justify-between h-16 sm:h-20">
           
           {/* Logo & System Title */}
-          <Link href="/" className="flex items-center gap-2.5 sm:gap-3.5 group">
-            <div className="h-10 sm:h-12 flex items-center justify-center shrink-0">
+          <Link href="/" className="flex items-center gap-2 sm:gap-3 group min-w-0 shrink mr-1">
+            <div className="h-9 sm:h-11 flex items-center justify-center shrink-0">
               <img
                 src="/weltraf-logo-transparent.png"
                 alt="Weltraf Transformer Logo"
-                className="h-8 sm:h-10 w-auto object-contain transition-transform group-hover:scale-105"
+                className="h-7 sm:h-9 w-auto max-w-[130px] sm:max-w-none object-contain transition-transform group-hover:scale-105"
               />
             </div>
-            <div className="border-l border-slate-200 pl-2.5 sm:pl-3">
-              <div className="flex items-center gap-1.5 sm:gap-2">
-                <span className="font-extrabold text-xs sm:text-base tracking-tight text-slate-900 leading-none">
+            <div className="border-l border-slate-200 pl-2 sm:pl-2.5 hidden min-[440px]:block min-w-0">
+              <div className="flex items-center gap-1.5">
+                <span className="font-extrabold text-xs sm:text-sm tracking-tight text-slate-900 leading-none truncate">
                   MEETING ROOM
                 </span>
-                <span className="text-[9px] sm:text-[11px] font-bold uppercase tracking-wider bg-red-100 text-red-700 px-1.5 py-0.5 rounded-full leading-none">
+                <span className="text-[9px] font-bold uppercase tracking-wider bg-red-100 text-red-700 px-1.5 py-0.5 rounded-full leading-none shrink-0">
                   BOOKING
                 </span>
               </div>
-              <p className="text-[10px] sm:text-xs text-slate-500 font-medium hidden xs:block mt-0.5">
+              <p className="text-[10px] text-slate-500 font-medium hidden sm:block mt-0.5">
                 PT. Symphos Electric
               </p>
             </div>
@@ -79,32 +79,35 @@ export function Navbar({ onOpenBooking, onOpenCancel, onScrollToSchedule }: Navb
             </div>
           </div>
 
-          {/* Action Buttons */}
-          <div className="flex items-center space-x-1.5 sm:space-x-2.5">
+          {/* Action Buttons (Separated, Never Colliding) */}
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+            {/* Tombol Batal */}
             <button
               onClick={onOpenCancel}
-              className="inline-flex items-center gap-1 px-2.5 sm:px-3 py-1.5 sm:py-2 text-xs font-medium text-slate-600 hover:text-red-700 hover:bg-red-50 rounded-xl transition border border-slate-200"
+              className="inline-flex items-center justify-center gap-1 px-2.5 sm:px-3 py-1.5 sm:py-2 text-xs font-semibold text-slate-700 hover:text-red-700 hover:bg-red-50 bg-white rounded-xl transition border border-slate-200 shadow-2xs shrink-0 cursor-pointer active:scale-95"
               title="Batalkan Booking"
             >
-              <XCircle className="w-3.5 h-3.5 text-slate-400 group-hover:text-red-600" />
-              <span className="hidden sm:inline">Batal</span>
+              <XCircle className="w-3.5 h-3.5 text-slate-400 group-hover:text-red-600 shrink-0" />
+              <span className="text-[11px] sm:text-xs">Batal</span>
             </button>
 
+            {/* Tombol Booking */}
             <button
               onClick={onOpenBooking}
-              className="inline-flex items-center gap-1.5 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-bold text-white bg-red-600 hover:bg-red-700 active:bg-red-800 rounded-xl shadow-xs transition cursor-pointer"
+              className="inline-flex items-center justify-center gap-1 px-3 sm:px-4 py-1.5 sm:py-2 text-xs sm:text-sm font-bold text-white bg-red-600 hover:bg-red-700 active:bg-red-800 rounded-xl shadow-xs transition cursor-pointer shrink-0 active:scale-95"
             >
-              <PlusCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
+              <PlusCircle className="w-3.5 h-3.5 sm:w-4 sm:h-4 shrink-0" />
               <span>Booking</span>
             </button>
 
+            {/* Tombol Admin */}
             <Link
               href="/admin"
-              className="inline-flex items-center gap-1 px-2.5 sm:px-3 py-1.5 sm:py-2 text-xs font-semibold text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 rounded-xl transition border border-slate-200"
+              className="inline-flex items-center justify-center p-2 sm:px-3 sm:py-2 text-xs font-semibold text-slate-600 hover:text-slate-900 bg-slate-100 hover:bg-slate-200 rounded-xl transition border border-slate-200 shrink-0 active:scale-95"
               title="Masuk ke Dashboard Administrator"
             >
-              <Shield className="w-3.5 h-3.5 text-slate-500" />
-              <span className="hidden sm:inline">Admin</span>
+              <Shield className="w-3.5 h-3.5 text-slate-500 shrink-0" />
+              <span className="hidden md:inline">Admin</span>
             </Link>
           </div>
 
