@@ -97,12 +97,13 @@ function initSqliteSchema(db: DatabaseSync) {
     CREATE INDEX IF NOT EXISTS idx_bookings_date_room ON bookings(meeting_date, room_id, status);
   `);
 
-  // Ensure room names are simplified to Ruang R1, Ruang R2, Ruang R3, Ruang R4
+  // Ensure room names, descriptions, and facilities are updated to TV LG 65 INCH, WIFI, JETE VIDEO CONFRENCE
+  const defaultFacilitiesJson = JSON.stringify(['TV LG 65 INCH', 'WIFI', 'JETE VIDEO CONFRENCE']);
   db.exec(`
-    UPDATE meeting_rooms SET room_name = 'Ruang R1' WHERE room_code = 'R1';
-    UPDATE meeting_rooms SET room_name = 'Ruang R2' WHERE room_code = 'R2';
-    UPDATE meeting_rooms SET room_name = 'Ruang R3' WHERE room_code = 'R3';
-    UPDATE meeting_rooms SET room_name = 'Ruang R4' WHERE room_code = 'R4';
+    UPDATE meeting_rooms SET room_name = 'Ruang R1', facilities = '${defaultFacilitiesJson}', description = 'Ruang rapat utama berkapasitas 16 orang, dilengkapi TV LG 65 INCH, WIFI, dan JETE VIDEO CONFRENCE.' WHERE room_code = 'R1';
+    UPDATE meeting_rooms SET room_name = 'Ruang R2', facilities = '${defaultFacilitiesJson}', description = 'Ruang kolaborasi tim berkapasitas 10 orang, dilengkapi TV LG 65 INCH, WIFI, dan JETE VIDEO CONFRENCE.' WHERE room_code = 'R2';
+    UPDATE meeting_rooms SET room_name = 'Ruang R3', facilities = '${defaultFacilitiesJson}', description = 'Ruang pertemuan tim berkapasitas 8 orang, dilengkapi TV LG 65 INCH, WIFI, dan JETE VIDEO CONFRENCE.' WHERE room_code = 'R3';
+    UPDATE meeting_rooms SET room_name = 'Ruang R4', facilities = '${defaultFacilitiesJson}', description = 'Ruang diskusi fokus berkapasitas 6 orang, dilengkapi TV LG 65 INCH, WIFI, dan JETE VIDEO CONFRENCE.' WHERE room_code = 'R4';
   `);
 
   // Seed default 4 rooms: R1, R2, R3, R4
@@ -119,8 +120,8 @@ function initSqliteSchema(db: DatabaseSync) {
       'R1',
       'Ruang R1',
       16,
-      'Ruang rapat dengan proyektor laser 4K, sistem video conference Polycom, sound system, whiteboard kaca, dan AC VIP.',
-      JSON.stringify(['Proyektor Laser 4K', 'Video Conference Polycom', 'Wireless Mic & Audio', 'Whiteboard Kaca', 'AC VIP']),
+      'Ruang rapat utama berkapasitas 16 orang, dilengkapi TV LG 65 INCH, WIFI, dan JETE VIDEO CONFRENCE.',
+      defaultFacilitiesJson,
       now
     );
 
@@ -129,8 +130,8 @@ function initSqliteSchema(db: DatabaseSync) {
       'R2',
       'Ruang R2',
       10,
-      'Ruang kolaborasi dilengkapi Smart TV 75 inch interaktif, konektivitas wireless screen-cast, dan whiteboard dinding penuh.',
-      JSON.stringify(['Smart TV 75" 4K', 'Glass Whiteboard', 'Wireless Presentation', 'Audio Speakerphone', 'AC']),
+      'Ruang kolaborasi tim berkapasitas 10 orang, dilengkapi TV LG 65 INCH, WIFI, dan JETE VIDEO CONFRENCE.',
+      defaultFacilitiesJson,
       now
     );
 
@@ -139,8 +140,8 @@ function initSqliteSchema(db: DatabaseSync) {
       'R3',
       'Ruang R3',
       8,
-      'Ruang rapat tim dilengkapi monitor LED 55 inch, whiteboard, conference mic, dan konektivitas LAN/WiFi.',
-      JSON.stringify(['Monitor LED 55"', 'Whiteboard', 'Conference Mic', 'High-Speed LAN/WiFi', 'AC']),
+      'Ruang pertemuan tim berkapasitas 8 orang, dilengkapi TV LG 65 INCH, WIFI, dan JETE VIDEO CONFRENCE.',
+      defaultFacilitiesJson,
       now
     );
 
@@ -149,8 +150,8 @@ function initSqliteSchema(db: DatabaseSync) {
       'R4',
       'Ruang R4',
       6,
-      'Ruang diskusi kedap suara untuk sesi rapat internal kecil dan konsultasi tertutup.',
-      JSON.stringify(['Monitor LED 50"', 'Soundproofing Panel', 'Whiteboard', 'AC']),
+      'Ruang diskusi fokus berkapasitas 6 orang, dilengkapi TV LG 65 INCH, WIFI, dan JETE VIDEO CONFRENCE.',
+      defaultFacilitiesJson,
       now
     );
 

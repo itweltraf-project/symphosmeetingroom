@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { RoomWithStatus } from '@/lib/types';
-import { Users, Clock, Calendar, CheckCircle2, AlertCircle, PlayCircle, Sparkles } from 'lucide-react';
+import { Users, Clock, Calendar, CheckCircle2, AlertCircle, PlayCircle, Sparkles, Tv, Wifi, Video } from 'lucide-react';
 
 interface RoomCardProps {
   room: RoomWithStatus;
@@ -10,92 +10,126 @@ interface RoomCardProps {
   selectedDate: string;
 }
 
+const ROOM_BACKGROUNDS: Record<string, string> = {
+  R1: '/rooms/room-r1.jpg',
+  R2: '/rooms/room-r2.jpg',
+  R3: '/rooms/room-r3.jpg',
+  R4: '/rooms/room-r4.jpg',
+};
+
 export function RoomCard({ room, onBookRoom, selectedDate }: RoomCardProps) {
   const isAvailable = room.currentStatus === 'available';
   const isOccupied = room.currentStatus === 'occupied';
   const isUpcoming = room.currentStatus === 'upcoming';
 
+  const roomBg = ROOM_BACKGROUNDS[room.room_code] || '/rooms/room-r1.jpg';
+
   const statusConfig = {
     available: {
-      badgeBg: 'bg-emerald-50 text-emerald-700 border-emerald-200',
+      badgeBg: 'bg-emerald-50/90 text-emerald-800 border-emerald-300',
       dotColor: 'bg-emerald-500',
       pulseClass: 'status-pulse-available',
       label: 'Ruangan Tersedia',
-      borderColor: 'border-emerald-200 hover:border-emerald-300',
+      borderColor: 'border-emerald-200 hover:border-emerald-400',
       headerBg: 'bg-emerald-500/10',
       ringColor: 'ring-emerald-500/10',
     },
     occupied: {
-      badgeBg: 'bg-rose-50 text-rose-700 border-rose-200',
+      badgeBg: 'bg-rose-50/90 text-rose-800 border-rose-300',
       dotColor: 'bg-rose-600',
       pulseClass: 'status-pulse-occupied',
       label: 'Ruangan Terpakai',
-      borderColor: 'border-rose-200 hover:border-rose-300',
+      borderColor: 'border-rose-200 hover:border-rose-400',
       headerBg: 'bg-rose-500/10',
       ringColor: 'ring-rose-500/10',
     },
     upcoming: {
-      badgeBg: 'bg-amber-50 text-amber-700 border-amber-200',
+      badgeBg: 'bg-amber-50/90 text-amber-800 border-amber-300',
       dotColor: 'bg-amber-500',
       pulseClass: 'status-pulse-upcoming',
       label: 'Akan Datang Segera',
-      borderColor: 'border-amber-200 hover:border-amber-300',
+      borderColor: 'border-amber-200 hover:border-amber-400',
       headerBg: 'bg-amber-500/10',
       ringColor: 'ring-amber-500/10',
     },
   }[room.currentStatus];
 
+  const getFacilityIcon = (facilityName: string) => {
+    const lower = facilityName.toLowerCase();
+    if (lower.includes('tv') || lower.includes('monitor') || lower.includes('proyektor')) {
+      return <Tv className="w-3 h-3 text-slate-500 shrink-0" />;
+    }
+    if (lower.includes('wifi') || lower.includes('lan')) {
+      return <Wifi className="w-3 h-3 text-slate-500 shrink-0" />;
+    }
+    if (lower.includes('video') || lower.includes('conference') || lower.includes('polycom') || lower.includes('jete')) {
+      return <Video className="w-3 h-3 text-slate-500 shrink-0" />;
+    }
+    return null;
+  };
+
   return (
     <div
-      className={`relative bg-white rounded-2xl border transition-all duration-200 shadow-xs hover:shadow-md flex flex-col justify-between overflow-hidden ${statusConfig.borderColor} ring-4 ${statusConfig.ringColor}`}
+      className={`group relative bg-white rounded-2xl border transition-all duration-200 shadow-xs hover:shadow-lg flex flex-col justify-between overflow-hidden ${statusConfig.borderColor} ring-4 ${statusConfig.ringColor}`}
     >
-      {/* Top Banner & Room Code */}
+      {/* Top Banner with Transparent Meeting Room Background */}
       <div>
-        <div className="p-5 pb-3">
-          <div className="flex flex-wrap items-center justify-between gap-2 mb-2.5">
-            <div className="flex items-center gap-2 sm:gap-2.5">
-              <span className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-900 text-white font-black text-base sm:text-lg flex items-center justify-center shadow-xs shrink-0">
-                {room.room_code}
-              </span>
-              <div>
-                <h3 className="font-extrabold text-slate-900 text-sm sm:text-base leading-tight">
-                  {room.room_name}
-                </h3>
-                <div className="flex items-center gap-1.5 text-[11px] sm:text-xs text-slate-500 mt-0.5">
-                  <Users className="w-3.5 h-3.5 text-slate-400 shrink-0" />
-                  <span>Kapasitas {room.capacity} Orang</span>
+        <div className="relative overflow-hidden border-b border-slate-100">
+          {/* Transparent Room Background Image */}
+          <div
+            className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105"
+            style={{ backgroundImage: `url(${roomBg})` }}
+          />
+          {/* Glassmorphic semi-transparent backdrop overlay */}
+          <div className="absolute inset-0 bg-gradient-to-b from-white/85 via-white/80 to-white/95 backdrop-blur-[2px]" />
+
+          <div className="relative z-10 p-5 pb-3.5">
+            <div className="flex flex-wrap items-center justify-between gap-2 mb-2.5">
+              <div className="flex items-center gap-2 sm:gap-2.5">
+                <span className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-slate-900/95 text-white font-black text-base sm:text-lg flex items-center justify-center shadow-md shrink-0 border border-white/40">
+                  {room.room_code}
+                </span>
+                <div>
+                  <h3 className="font-extrabold text-slate-900 text-sm sm:text-base leading-tight">
+                    {room.room_name}
+                  </h3>
+                  <div className="flex items-center gap-1.5 text-[11px] sm:text-xs text-slate-600 font-medium mt-0.5">
+                    <Users className="w-3.5 h-3.5 text-slate-500 shrink-0" />
+                    <span>Kapasitas {room.capacity} Orang</span>
+                  </div>
                 </div>
+              </div>
+
+              {/* Status Badge */}
+              <div
+                className={`inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-bold border backdrop-blur-md shadow-2xs ${statusConfig.badgeBg}`}
+              >
+                <span className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full ${statusConfig.dotColor} ${statusConfig.pulseClass}`} />
+                <span>{statusConfig.label}</span>
               </div>
             </div>
 
-            {/* Status Badge */}
-            <div
-              className={`inline-flex items-center gap-1.5 px-2.5 sm:px-3 py-1 rounded-full text-[10px] sm:text-xs font-bold border ${statusConfig.badgeBg}`}
-            >
-              <span className={`w-1.5 h-1.5 sm:w-2 sm:h-2 rounded-full ${statusConfig.dotColor} ${statusConfig.pulseClass}`} />
-              <span>{statusConfig.label}</span>
+            <p className="text-xs text-slate-700 font-medium line-clamp-2 leading-relaxed mb-3">
+              {room.description}
+            </p>
+
+            {/* Facilities Pills with icons */}
+            <div className="flex flex-wrap gap-1.5 mb-1">
+              {room.facilities.slice(0, 3).map((f, i) => (
+                <span
+                  key={i}
+                  className="text-[11px] font-semibold bg-white/90 text-slate-700 px-2 py-0.5 rounded-md border border-slate-200/90 shadow-2xs backdrop-blur-xs flex items-center gap-1"
+                >
+                  {getFacilityIcon(f)}
+                  <span>{f}</span>
+                </span>
+              ))}
+              {room.facilities.length > 3 && (
+                <span className="text-[11px] font-semibold bg-white/90 text-slate-500 px-1.5 py-0.5 rounded-md border border-slate-200/90 shadow-2xs">
+                  +{room.facilities.length - 3}
+                </span>
+              )}
             </div>
-          </div>
-
-          <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed mb-3">
-            {room.description}
-          </p>
-
-          {/* Facilities Pills */}
-          <div className="flex flex-wrap gap-1 mb-4">
-            {room.facilities.slice(0, 3).map((f, i) => (
-              <span
-                key={i}
-                className="text-[11px] font-medium bg-slate-100 text-slate-600 px-2 py-0.5 rounded-md"
-              >
-                {f}
-              </span>
-            ))}
-            {room.facilities.length > 3 && (
-              <span className="text-[11px] font-medium bg-slate-100 text-slate-500 px-1.5 py-0.5 rounded-md">
-                +{room.facilities.length - 3}
-              </span>
-            )}
           </div>
         </div>
 
@@ -153,6 +187,39 @@ export function RoomCard({ room, onBookRoom, selectedDate }: RoomCardProps) {
           <div className="mt-2 pt-2 border-t border-slate-200/60 flex items-center justify-between text-[11px] text-slate-500">
             <span>Status Ketersediaan:</span>
             <span className="font-semibold text-slate-700">{room.nextAvailableTime}</span>
+          </div>
+
+          {/* Jam Sudah Terbooking Hari Ini */}
+          <div className="mt-2.5 pt-2 border-t border-slate-200/80">
+            <div className="flex items-center justify-between text-[11px] mb-1.5">
+              <span className="font-bold text-slate-800 flex items-center gap-1">
+                <Clock className="w-3.5 h-3.5 text-red-600" />
+                Jam Sudah Terbooking:
+              </span>
+              <span className="text-[10px] text-slate-600 font-mono font-bold bg-slate-200/70 px-1.5 py-0.5 rounded">
+                {room.bookingsToday.length} jadwal
+              </span>
+            </div>
+
+            {room.bookingsToday.length > 0 ? (
+              <div className="flex flex-wrap gap-1.5 mt-1">
+                {room.bookingsToday.map((b) => (
+                  <span
+                    key={b.id}
+                    className="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-lg text-[11px] font-mono font-bold bg-rose-50 text-rose-800 border border-rose-200 shadow-2xs"
+                    title={`${b.meeting_title} (${b.employee_name} - ${b.department})`}
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-rose-500 shrink-0" />
+                    <span>{b.start_time} - {b.end_time}</span>
+                  </span>
+                ))}
+              </div>
+            ) : (
+              <div className="flex items-center gap-1 text-[11px] font-semibold text-emerald-700 bg-emerald-50 px-2 py-1 rounded-lg border border-emerald-200 mt-1">
+                <CheckCircle2 className="w-3.5 h-3.5 text-emerald-600 shrink-0" />
+                <span>Kosong seharian (Bebas booking kapan saja)</span>
+              </div>
+            )}
           </div>
         </div>
       </div>

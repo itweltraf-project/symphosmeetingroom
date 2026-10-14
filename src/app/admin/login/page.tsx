@@ -55,17 +55,19 @@ export default function AdminLoginPage() {
 
       <div className="bg-white rounded-3xl max-w-md w-full p-8 shadow-2xl border border-slate-800">
         
-        {/* Header Icon */}
-        <div className="flex items-center gap-3 mb-6">
-          <div className="w-12 h-12 rounded-2xl bg-red-600 flex items-center justify-center text-white shadow-md shadow-red-600/30">
-            <Shield className="w-6 h-6" />
-          </div>
+        {/* Header Icon & Logo */}
+        <div className="flex flex-col items-center text-center gap-3 mb-6 pb-6 border-b border-slate-100">
+          <img
+            src="/weltraf-logo-transparent.png"
+            alt="Weltraf Logo"
+            className="h-12 w-auto object-contain"
+          />
           <div>
-            <h1 className="text-xl font-black text-slate-900">
-              Admin Dashboard
+            <h1 className="text-xl font-black text-slate-900 mt-1">
+              Admin Portal Login
             </h1>
             <p className="text-xs text-slate-500">
-              Sistem Manajemen Reservasi Ruang Rapat
+              Sistem Manajemen Reservasi Ruang Rapat • PT. Symphos Electric
             </p>
           </div>
         </div>

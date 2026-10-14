@@ -153,6 +153,10 @@ export default function HomePage() {
 
           <div className="relative z-10 flex flex-col lg:flex-row lg:items-center justify-between gap-5 sm:gap-6">
             <div className="max-w-2xl">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-white/10 backdrop-blur-md border border-white/15 mb-3 text-xs font-semibold text-slate-200">
+                <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse" />
+                <span>PT. Symphos Electric &bull; Weltraf Transformer</span>
+              </div>
               <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black tracking-tight leading-tight text-white">
                 Booking Ruang Meeting
               </h1>
@@ -282,11 +286,17 @@ export default function HomePage() {
 
       {/* FOOTER */}
       <footer className="mt-12 sm:mt-16 bg-white border-t border-slate-200 py-6 sm:py-8 text-xs text-slate-500">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
-          <div className="flex items-center gap-2">
-            <Building2 className="w-4 h-4 text-red-600 shrink-0" />
-            <span className="font-bold text-slate-800">Meeting Room Booking System</span>
-            <span className="hidden sm:inline">• Solusi Reservasi Terpusat Perusahaan</span>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-center sm:text-left">
+          <div className="flex items-center gap-3">
+            <img 
+              src="/weltraf-logo-transparent.png" 
+              alt="Weltraf Logo" 
+              className="h-7 w-auto object-contain" 
+            />
+            <div className="border-l border-slate-200 pl-3">
+              <span className="font-bold text-slate-800">Meeting Room Booking System</span>
+              <span className="hidden sm:inline"> • PT. Symphos Electric</span>
+            </div>
           </div>
           <div className="text-[11px] text-slate-400">
             <span>Sistem dilengkapi proteksi pencegahan jadwal bentrok transaksional.</span>

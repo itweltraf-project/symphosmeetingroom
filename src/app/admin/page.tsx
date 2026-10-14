@@ -240,15 +240,19 @@ export default function AdminDashboardPage() {
           {/* Brand Header */}
           <div className="p-4 sm:p-6 border-b border-slate-800 flex items-center justify-between md:block">
             <div className="flex items-center gap-3">
-              <div className="w-9 h-9 sm:w-10 sm:h-10 rounded-xl bg-red-600 flex items-center justify-center text-white font-black shadow-md shrink-0">
-                <Building2 className="w-5 h-5 sm:w-6 sm:h-6" />
+              <div className="bg-white p-1.5 rounded-xl shrink-0 shadow-xs">
+                <img
+                  src="/weltraf-logo-transparent.png"
+                  alt="Weltraf Logo"
+                  className="h-7 w-auto object-contain"
+                />
               </div>
               <div>
                 <h2 className="font-extrabold text-white text-sm tracking-tight leading-none">
                   ADMIN PORTAL
                 </h2>
                 <span className="text-[10px] text-slate-400 font-mono mt-1 block">
-                  Meeting Room System
+                  PT. Symphos Electric
                 </span>
               </div>
             </div>

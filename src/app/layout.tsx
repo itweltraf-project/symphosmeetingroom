@@ -13,8 +13,8 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: 'Meeting Room Booking | Sistem Reservasi Ruang Rapat Terpusat',
-  description: 'Aplikasi pemesanan ruang meeting modern tanpa login dengan proteksi bentrok jadwal transaksional real-time untuk Ruang R1, R2, R3, dan R4.',
+  title: 'Meeting Room Booking | Weltraf Transformer - PT. Symphos Electric',
+  description: 'Aplikasi pemesanan ruang meeting modern tanpa login dengan proteksi bentrok jadwal transaksional real-time untuk Ruang R1, R2, R3, dan R4 PT. Symphos Electric.',
 };
 
 export default function RootLayout({

@@ -20,6 +20,7 @@ interface BookingModalProps {
   isOpen: boolean;
   onClose: () => void;
   rooms: MeetingRoom[];
+  bookings?: Booking[];
   initialRoomId?: string;
   initialDate?: string;
   initialStartTime?: string;
@@ -293,6 +294,22 @@ export function BookingModal({
                 </button>
               ))}
             </div>
+
+            {selectedRoom && (
+              <div className="mt-2.5 p-2.5 rounded-xl bg-slate-50 border border-slate-200 text-xs text-slate-600 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <span className="font-medium text-slate-700">{selectedRoom.description}</span>
+                <div className="flex flex-wrap gap-1 shrink-0">
+                  {selectedRoom.facilities?.map((f, i) => (
+                    <span
+                      key={i}
+                      className="bg-white border border-slate-200 px-2 py-0.5 rounded-md text-[10px] font-semibold text-slate-700 shadow-2xs"
+                    >
+                      {f}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
 
           {/* Date & Time Grid */}

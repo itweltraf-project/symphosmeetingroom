@@ -43,24 +43,28 @@ export function Navbar({ onOpenBooking, onOpenCancel, onScrollToSchedule }: Navb
         <div className="flex items-center justify-between h-16 sm:h-20">
           
           {/* Logo & System Title */}
-          <div className="flex items-center space-x-2.5 sm:space-x-3">
-            <div className="h-9 w-9 sm:h-12 sm:w-12 rounded-xl bg-red-600 flex items-center justify-center text-white shadow-md shadow-red-500/20 shrink-0">
-              <Building2 className="w-5 h-5 sm:w-7 sm:h-7" />
+          <Link href="/" className="flex items-center gap-2.5 sm:gap-3.5 group">
+            <div className="h-10 sm:h-12 flex items-center justify-center shrink-0">
+              <img
+                src="/weltraf-logo-transparent.png"
+                alt="Weltraf Transformer Logo"
+                className="h-8 sm:h-10 w-auto object-contain transition-transform group-hover:scale-105"
+              />
             </div>
-            <div>
+            <div className="border-l border-slate-200 pl-2.5 sm:pl-3">
               <div className="flex items-center gap-1.5 sm:gap-2">
-                <span className="font-extrabold text-sm sm:text-xl tracking-tight text-slate-900 leading-none">
+                <span className="font-extrabold text-xs sm:text-base tracking-tight text-slate-900 leading-none">
                   MEETING ROOM
                 </span>
-                <span className="text-[10px] sm:text-xs font-bold uppercase tracking-wider bg-red-100 text-red-700 px-1.5 sm:px-2 py-0.5 rounded-full leading-none">
+                <span className="text-[9px] sm:text-[11px] font-bold uppercase tracking-wider bg-red-100 text-red-700 px-1.5 py-0.5 rounded-full leading-none">
                   BOOKING
                 </span>
               </div>
               <p className="text-[10px] sm:text-xs text-slate-500 font-medium hidden xs:block mt-0.5">
-                Sistem Reservasi Terpusat
+                PT. Symphos Electric
               </p>
             </div>
-          </div>
+          </Link>
 
           {/* Live Date & Time Display (Desktop) */}
           <div className="hidden lg:flex items-center space-x-5 px-4 py-2 bg-slate-50 rounded-xl border border-slate-200/80">
